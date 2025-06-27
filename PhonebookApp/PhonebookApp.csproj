@@ -23,7 +23,6 @@
     <ItemGroup>
       <Folder Include="Repositories\" />
       <Folder Include="Services\" />
-      <Folder Include="Utils\" />
       <Folder Include="Validations\" />
     </ItemGroup>
 

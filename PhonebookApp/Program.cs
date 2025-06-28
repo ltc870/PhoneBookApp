@@ -7,8 +7,6 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello, World!");
-        
         RunProgramUtil.RunProgram();
 
         // ContactContext context = new ContactContext();

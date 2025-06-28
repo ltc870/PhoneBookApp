@@ -78,4 +78,5 @@ desktop.ini
 .idea/.idea.FlashcardApp/.idea/dataSources.xml
 .idea/.idea.FlashcardApp/.idea/indexLayout.xml
 .idea/.idea.FlashcardApp/.idea/material_theme_project_new.xml
-.idea/.idea.FlashcardApp/.idea/sqldialects.xml
+.idea/.idea.FlashcardApp/.idea/sqldialects.xml!/PhonebookApp/Migrations/
+/PhonebookApp/Migrations/

@@ -1,3 +1,7 @@
+using PhonebookApp.Models;
+using PhonebookApp.Repositories;
+using PhonebookApp.Services;
+
 namespace PhonebookApp.Utils;
 
 public class RunProgramUtil
@@ -6,17 +10,18 @@ public class RunProgramUtil
     {
         Console.WriteLine("Opening Phonebook App...");
         Console.WriteLine("Press any key to continue...");
-        Console.Clear();
         Console.ReadKey();
         UserOptions();
     }
 
     private static void UserOptions()
     {
+        ContactService contactService = new ContactService(new ContactRepository(new ContactContext()));
         bool phonebookAppRunning = true;
 
         while (phonebookAppRunning)
         {
+            Console.Clear();
             Console.WriteLine("Main Menu:");
             Console.WriteLine("<---------------------------------------------------------->\n");
             Console.WriteLine("Type 0 to Close Program.");
@@ -35,6 +40,8 @@ public class RunProgramUtil
                     Console.Clear();
                     phonebookAppRunning = false;
                     Console.WriteLine("Closing Phonebook App...");
+                    Console.WriteLine("Press any key to exit.");
+                    Console.ReadKey();
                     Environment.Exit(0);
                     break;
                 case "1":
@@ -47,7 +54,7 @@ public class RunProgramUtil
                     break;
                 case "3":
                     Console.WriteLine("Add A Contact selected.");
-                    // Call method to add a new contact
+                    contactService.AddContact();
                     break;
                 case "4":
                     Console.WriteLine("Update A Contact selected.");

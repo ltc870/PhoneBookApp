@@ -15,8 +15,8 @@ public ContactService(IContactRepository contactRepository)
     
     public void GetAllContacts()
     {
-        List<Contact> contacts = _contactRepository.GetAllContacts();
         Console.Clear();
+        List<Contact> contacts = _contactRepository.GetAllContacts();
         Console.WriteLine("Fetching all contacts...");
         Console.WriteLine("<---------------------------------------------------------->\n");
         if (contacts.Count == 0)
@@ -37,7 +37,15 @@ public ContactService(IContactRepository contactRepository)
 
     public void GetContactById()
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        GetAllContacts();
+        Console.WriteLine("Please enter the contact ID you want to view:");
+        string id = Console.ReadLine() ?? string.Empty;
+        Contact contact = _contactRepository.GetContactById(int.Parse(id));
+        
+        Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 
     public void AddContact()

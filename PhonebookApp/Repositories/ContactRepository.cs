@@ -18,7 +18,7 @@ public ContactRepository(ContactContext context)
 
     public Contact GetContactById(int id)
     {
-        throw new NotImplementedException();
+        return _context.Contacts.FirstOrDefault(contact => contact.Id == id);
     }
 
     public void AddContact(Contact contact)

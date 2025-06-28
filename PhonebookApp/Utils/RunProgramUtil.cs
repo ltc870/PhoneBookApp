@@ -50,7 +50,7 @@ public class RunProgramUtil
                     break;
                 case "2":
                     Console.WriteLine("View A Contact selected.");
-                    // Call method to view a specific contact
+                    contactService.GetContactById();
                     break;
                 case "3":
                     Console.WriteLine("Add A Contact selected.");

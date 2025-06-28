@@ -15,7 +15,24 @@ public ContactService(IContactRepository contactRepository)
     
     public void GetAllContacts()
     {
-        throw new NotImplementedException();
+        List<Contact> contacts = _contactRepository.GetAllContacts();
+        Console.Clear();
+        Console.WriteLine("Fetching all contacts...");
+        Console.WriteLine("<---------------------------------------------------------->\n");
+        if (contacts.Count == 0)
+        {
+            Console.WriteLine("No contacts found.");
+        }
+        else
+        {
+            foreach (var contact in contacts)
+            {
+                Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
+            }
+        }
+        Console.WriteLine("\n<---------------------------------------------------------->");
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 
     public void GetContactById()

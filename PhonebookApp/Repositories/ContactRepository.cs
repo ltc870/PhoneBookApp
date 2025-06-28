@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using PhonebookApp.Models;
 
 namespace PhonebookApp.Repositories;
@@ -12,7 +13,7 @@ public ContactRepository(ContactContext context)
     }
     public List<Contact> GetAllContacts()
     {
-        throw new NotImplementedException();
+        return _context.Contacts.ToList();
     }
 
     public Contact GetContactById(int id)

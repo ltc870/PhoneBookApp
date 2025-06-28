@@ -46,7 +46,7 @@ public class RunProgramUtil
                     break;
                 case "1":
                     Console.WriteLine("View All Contacts selected.");
-                    // Call method to view all contacts
+                    contactService.GetAllContacts();
                     break;
                 case "2":
                     Console.WriteLine("View A Contact selected.");

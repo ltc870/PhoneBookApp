@@ -91,11 +91,16 @@ public ContactService(IContactRepository contactRepository)
         if (!string.IsNullOrEmpty(newPhoneNumber)) contact.PhoneNumber = newPhoneNumber;
         if (!string.IsNullOrEmpty(newEmail)) contact.Email = newEmail;
         _contactRepository.UpdateContactById(contact.Id, contact);
-        
     }
 
     public void DeleteContactById()
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        Console.WriteLine("Deleting a contact...");
+        GetAllContacts();
+        Console.WriteLine("Please enter the contact ID you want to delete:");
+        string id = Console.ReadLine() ?? string.Empty;
+        
+        _contactRepository.DeleteContactById(int.Parse(id));
     }
 }

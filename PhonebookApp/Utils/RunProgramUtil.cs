@@ -62,7 +62,7 @@ public class RunProgramUtil
                     break;
                 case "5":
                     Console.WriteLine("Delete A Contact selected.");
-                    // Call method to delete a contact
+                    contactService.DeleteContactById();
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");

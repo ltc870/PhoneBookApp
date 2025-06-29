@@ -18,7 +18,12 @@ public ContactRepository(ContactContext context)
 
     public Contact GetContactById(int id)
     {
-        return _context.Contacts.FirstOrDefault(contact => contact.Id == id);
+        var contact = _context.Contacts.FirstOrDefault(contact => contact.Id == id);
+        if (contact == null)
+        {
+            throw new KeyNotFoundException($"Contact with ID {id} not found.");
+        }
+        return contact;
     }
 
     public void AddContact(Contact contact)
@@ -51,6 +56,18 @@ public ContactRepository(ContactContext context)
 
     public void DeleteContactById(int id)
     {
-        throw new NotImplementedException();
+        var contact = _context.Contacts.FirstOrDefault(c => c.Id == id);
+        if (contact != null)
+        {
+            _context.Contacts.Remove(contact);
+            _context.SaveChanges();
+            Console.WriteLine("Contact deleted successfully!");
+        }
+        else
+        {
+            Console.WriteLine("Contact not found.");
+        }
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 }

@@ -58,7 +58,7 @@ public class RunProgramUtil
                     break;
                 case "4":
                     Console.WriteLine("Update A Contact selected.");
-                    // Call method to update an existing contact
+                    contactService.UpdateContactById();
                     break;
                 case "5":
                     Console.WriteLine("Delete A Contact selected.");

@@ -7,7 +7,7 @@ public interface IContactRepository
     public List<Contact> GetAllContacts();
     public Contact GetContactById(int id);
     public void AddContact(Contact contact);
-    public void UpdateContactById(int id);
+    public void UpdateContactById(int id, Contact updatedContact);
     public void DeleteContactById(int id);
     
 }

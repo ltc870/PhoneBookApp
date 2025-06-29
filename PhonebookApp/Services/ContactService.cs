@@ -73,7 +73,25 @@ public ContactService(IContactRepository contactRepository)
 
     public void UpdateContactById()
     {
-        throw new NotImplementedException();
+        Console.Clear();
+        Console.WriteLine("Updating a contact...");
+        GetAllContacts();
+        Console.WriteLine("Please enter the contact ID you want to update:");
+        string id = Console.ReadLine() ?? string.Empty;
+        Contact contact = _contactRepository.GetContactById(int.Parse(id));
+        Console.WriteLine("Current Contact Details:");
+        Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
+        Console.WriteLine("Please enter the new name (or press Enter to keep current):");
+        string newName = Console.ReadLine() ?? string.Empty;
+        Console.WriteLine("Please enter the new phone number (or press Enter to keep current):");
+        string newPhoneNumber = Console.ReadLine() ?? string.Empty;
+        Console.WriteLine("Please enter the new email (or press Enter to keep current):");
+        string newEmail = Console.ReadLine() ?? string.Empty;
+        if (!string.IsNullOrEmpty(newName)) contact.Name = newName;
+        if (!string.IsNullOrEmpty(newPhoneNumber)) contact.PhoneNumber = newPhoneNumber;
+        if (!string.IsNullOrEmpty(newEmail)) contact.Email = newEmail;
+        _contactRepository.UpdateContactById(contact.Id, contact);
+        
     }
 
     public void DeleteContactById()

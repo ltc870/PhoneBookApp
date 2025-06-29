@@ -30,9 +30,23 @@ public ContactRepository(ContactContext context)
         Console.ReadKey();
     }
 
-    public void UpdateContactById(int id)
+    public void UpdateContactById(int id, Contact updatedContact)
     {
-        throw new NotImplementedException();
+        var existingContact = _context.Contacts.FirstOrDefault(contact => contact.Id == id);
+        if (existingContact != null)
+        {
+            existingContact.Name = updatedContact.Name;
+            existingContact.PhoneNumber = updatedContact.PhoneNumber;
+            existingContact.Email = updatedContact.Email;
+            _context.SaveChanges();
+            Console.WriteLine("Contact updated successfully!");
+        }
+        else
+        {
+            Console.WriteLine("Contact not found.");
+        }
+        Console.WriteLine("Press any key to continue...");
+        Console.ReadKey();
     }
 
     public void DeleteContactById(int id)

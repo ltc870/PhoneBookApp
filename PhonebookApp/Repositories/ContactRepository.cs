@@ -11,14 +11,14 @@ public ContactRepository(ContactContext context)
     {
         _context = context;
     }
-    public List<Contact> GetAllContacts()
+    public async Task<List<Contact>> GetAllContacts()
     {
-        return _context.Contacts.ToList();
+        return await _context.Contacts.ToListAsync();
     }
 
-    public Contact GetContactById(int id)
+    public async Task<Contact> GetContactById(int id)
     {
-        var contact = _context.Contacts.FirstOrDefault(contact => contact.Id == id);
+        var contact = await _context.Contacts.FirstOrDefaultAsync(contact => contact.Id == id);
         if (contact == null)
         {
             throw new KeyNotFoundException($"Contact with ID {id} not found.");
@@ -26,24 +26,24 @@ public ContactRepository(ContactContext context)
         return contact;
     }
 
-    public void AddContact(Contact contact)
+    public async Task AddContact(Contact contact)
     {
-        _context.Contacts.Add(contact);
-        _context.SaveChanges();
+        await _context.Contacts.AddAsync(contact);
+        await _context.SaveChangesAsync();
         Console.WriteLine("Contact added successfully!");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
 
-    public void UpdateContactById(int id, Contact updatedContact)
+    public async Task UpdateContactById(int id, Contact updatedContact)
     {
-        var existingContact = _context.Contacts.FirstOrDefault(contact => contact.Id == id);
+        var existingContact = await _context.Contacts.FirstOrDefaultAsync(contact => contact.Id == id);
         if (existingContact != null)
         {
             existingContact.Name = updatedContact.Name;
             existingContact.PhoneNumber = updatedContact.PhoneNumber;
             existingContact.Email = updatedContact.Email;
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             Console.WriteLine("Contact updated successfully!");
         }
         else
@@ -54,13 +54,13 @@ public ContactRepository(ContactContext context)
         Console.ReadKey();
     }
 
-    public void DeleteContactById(int id)
+    public async Task DeleteContactById(int id)
     {
-        var contact = _context.Contacts.FirstOrDefault(c => c.Id == id);
+        var contact = await _context.Contacts.FirstOrDefaultAsync(contact => contact.Id == id);
         if (contact != null)
         {
             _context.Contacts.Remove(contact);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
             Console.WriteLine("Contact deleted successfully!");
         }
         else

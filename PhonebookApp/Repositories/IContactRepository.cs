@@ -4,10 +4,10 @@ namespace PhonebookApp.Repositories;
 
 public interface IContactRepository
 {
-    public List<Contact> GetAllContacts();
-    public Contact GetContactById(int id);
-    public void AddContact(Contact contact);
-    public void UpdateContactById(int id, Contact updatedContact);
-    public void DeleteContactById(int id);
+    public Task<List<Contact>> GetAllContacts();
+    public Task<Contact> GetContactById(int id);
+    public Task AddContact(Contact contact);
+    public Task UpdateContactById(int id, Contact updatedContact);
+    public Task DeleteContactById(int id);
     
 }

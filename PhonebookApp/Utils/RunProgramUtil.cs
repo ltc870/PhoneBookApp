@@ -14,7 +14,7 @@ public class RunProgramUtil
         UserOptions();
     }
 
-    private static void UserOptions()
+    private static async Task UserOptions()
     {
         ContactService contactService = new ContactService(new ContactRepository(new ContactContext()));
         bool phonebookAppRunning = true;
@@ -46,11 +46,11 @@ public class RunProgramUtil
                     break;
                 case "1":
                     Console.WriteLine("View All Contacts selected.");
-                    contactService.GetAllContacts();
+                    await contactService.GetAllContacts();
                     break;
                 case "2":
                     Console.WriteLine("View A Contact selected.");
-                    contactService.GetContactById();
+                    await contactService.GetContactById();
                     break;
                 case "3":
                     Console.WriteLine("Add A Contact selected.");
@@ -58,11 +58,11 @@ public class RunProgramUtil
                     break;
                 case "4":
                     Console.WriteLine("Update A Contact selected.");
-                    contactService.UpdateContactById();
+                    await contactService.UpdateContactById();
                     break;
                 case "5":
                     Console.WriteLine("Delete A Contact selected.");
-                    contactService.DeleteContactById();
+                    await contactService.DeleteContactById();
                     break;
                 default:
                     Console.WriteLine("Invalid option. Please try again.");

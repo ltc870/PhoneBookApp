@@ -13,10 +13,10 @@ public ContactService(IContactRepository contactRepository)
         _contactRepository = contactRepository;
     }
     
-    public void GetAllContacts()
+    public async Task GetAllContacts()
     {
         Console.Clear();
-        List<Contact> contacts = _contactRepository.GetAllContacts();
+        List<Contact> contacts = await _contactRepository.GetAllContacts();
         Console.WriteLine("Fetching all contacts...");
         Console.WriteLine("<---------------------------------------------------------->\n");
         if (contacts.Count == 0)
@@ -29,19 +29,19 @@ public ContactService(IContactRepository contactRepository)
             {
                 Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
             }
+            Console.WriteLine("\n<---------------------------------------------------------->");
         }
-        Console.WriteLine("\n<---------------------------------------------------------->");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
 
-    public void GetContactById()
+    public async Task GetContactById()
     {
         Console.Clear();
-        GetAllContacts();
+        await GetAllContacts();
         Console.WriteLine("Please enter the contact ID you want to view:");
         string id = Console.ReadLine() ?? string.Empty;
-        Contact contact = _contactRepository.GetContactById(int.Parse(id));
+        Contact contact = await _contactRepository.GetContactById(int.Parse(id));
         
         Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
         Console.WriteLine("Press any key to continue...");
@@ -71,14 +71,14 @@ public ContactService(IContactRepository contactRepository)
         _contactRepository.AddContact(newContact);
     }
 
-    public void UpdateContactById()
+    public async Task UpdateContactById()
     {
         Console.Clear();
         Console.WriteLine("Updating a contact...");
-        GetAllContacts();
+        await GetAllContacts();
         Console.WriteLine("Please enter the contact ID you want to update:");
         string id = Console.ReadLine() ?? string.Empty;
-        Contact contact = _contactRepository.GetContactById(int.Parse(id));
+        Contact contact = await _contactRepository.GetContactById(int.Parse(id));
         Console.WriteLine("Current Contact Details:");
         Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
         Console.WriteLine("Please enter the new name (or press Enter to keep current):");
@@ -90,17 +90,17 @@ public ContactService(IContactRepository contactRepository)
         if (!string.IsNullOrEmpty(newName)) contact.Name = newName;
         if (!string.IsNullOrEmpty(newPhoneNumber)) contact.PhoneNumber = newPhoneNumber;
         if (!string.IsNullOrEmpty(newEmail)) contact.Email = newEmail;
-        _contactRepository.UpdateContactById(contact.Id, contact);
+        await _contactRepository.UpdateContactById(contact.Id, contact);
     }
 
-    public void DeleteContactById()
+    public async Task DeleteContactById()
     {
         Console.Clear();
         Console.WriteLine("Deleting a contact...");
-        GetAllContacts();
+        await GetAllContacts();
         Console.WriteLine("Please enter the contact ID you want to delete:");
         string id = Console.ReadLine() ?? string.Empty;
         
-        _contactRepository.DeleteContactById(int.Parse(id));
+        await _contactRepository.DeleteContactById(int.Parse(id));
     }
 }

@@ -6,12 +6,12 @@ namespace PhonebookApp.Utils;
 
 public class RunProgramUtil
 {
-    public static void RunProgram()
+    public static async Task RunProgram()
     {
         Console.WriteLine("Opening Phonebook App...");
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
-        UserOptions();
+        await UserOptions();
     }
 
     private static async Task UserOptions()

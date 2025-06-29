@@ -48,7 +48,7 @@ public ContactService(IContactRepository contactRepository)
         Console.ReadKey();
     }
 
-    public void AddContact()
+    public async Task AddContact()
     {
         Console.Clear();
         Console.WriteLine("Adding a new contact...");
@@ -68,7 +68,7 @@ public ContactService(IContactRepository contactRepository)
             Email = contactEmail
         };
         
-        _contactRepository.AddContact(newContact);
+        await _contactRepository.AddContact(newContact);
     }
 
     public async Task UpdateContactById()

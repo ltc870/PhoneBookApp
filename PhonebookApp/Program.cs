@@ -5,8 +5,8 @@ namespace PhonebookApp;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
-        RunProgramUtil.RunProgram();
+        await RunProgramUtil.RunProgram();
     }
 }

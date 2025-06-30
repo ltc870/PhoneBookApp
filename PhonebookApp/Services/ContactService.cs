@@ -1,5 +1,6 @@
 using PhonebookApp.Models;
 using PhonebookApp.Repositories;
+using PhonebookApp.Validations;
 
 namespace PhonebookApp.Services;
 
@@ -58,8 +59,20 @@ public ContactService(IContactRepository contactRepository)
         string contactName = Console.ReadLine() ?? string.Empty;
         Console.WriteLine("Please enter the contact's phone number:");
         string contactPhoneNumber = Console.ReadLine() ?? string.Empty;
+        bool isPhoneNumberValid = contactPhoneNumber.IsValidPhoneNumber();
+        if (!isPhoneNumberValid)
+        {
+            Console.WriteLine("Invalid phone number format. Please try again.");
+            return;
+        }
         Console.WriteLine("Please enter the contact's email:");
         string contactEmail = Console.ReadLine() ?? string.Empty;
+        contactEmail.IsValidEmail();
+        if (!contactEmail.IsValidEmail())
+        {
+            Console.WriteLine("Invalid email format. Please try again.");
+            return;
+        }
         
         Contact newContact = new Contact
         {

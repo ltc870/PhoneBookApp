@@ -62,7 +62,7 @@ public ContactService(IContactRepository contactRepository)
         bool isPhoneNumberValid = contactPhoneNumber.IsValidPhoneNumber();
         if (!isPhoneNumberValid)
         {
-            Console.WriteLine("Invalid phone number format. Please try again.");
+            Console.WriteLine("Invalid phone number format. Canceling operation.");
             return;
         }
         Console.WriteLine("Please enter the contact's email:");
@@ -70,7 +70,7 @@ public ContactService(IContactRepository contactRepository)
         contactEmail.IsValidEmail();
         if (!contactEmail.IsValidEmail())
         {
-            Console.WriteLine("Invalid email format. Please try again.");
+            Console.WriteLine("Invalid email format. Canceling operation.");
             return;
         }
         

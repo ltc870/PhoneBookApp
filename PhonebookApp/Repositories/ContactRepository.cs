@@ -28,9 +28,17 @@ public ContactRepository(ContactContext context)
 
     public async Task AddContact(Contact contact)
     {
-        await _context.Contacts.AddAsync(contact);
-        await _context.SaveChangesAsync();
-        Console.WriteLine("Contact added successfully!");
+        try
+        {
+            await _context.Contacts.AddAsync(contact);
+            await _context.SaveChangesAsync();
+            Console.WriteLine("Contact added successfully!");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error adding contact: {ex.Message}");
+            
+        }
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
@@ -43,8 +51,16 @@ public ContactRepository(ContactContext context)
             existingContact.Name = updatedContact.Name;
             existingContact.PhoneNumber = updatedContact.PhoneNumber;
             existingContact.Email = updatedContact.Email;
-            await _context.SaveChangesAsync();
-            Console.WriteLine("Contact updated successfully!");
+            try
+            {
+                await _context.SaveChangesAsync();
+                Console.WriteLine("Contact updated successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error updating contact: {ex.Message}");
+                throw;
+            }
         }
         else
         {
@@ -60,8 +76,15 @@ public ContactRepository(ContactContext context)
         if (contact != null)
         {
             _context.Contacts.Remove(contact);
-            await _context.SaveChangesAsync();
-            Console.WriteLine("Contact deleted successfully!");
+            try
+            {
+                await _context.SaveChangesAsync();
+                Console.WriteLine("Contact deleted successfully!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error deleting contact: {ex.Message}");
+            }
         }
         else
         {

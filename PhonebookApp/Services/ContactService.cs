@@ -57,22 +57,55 @@ public ContactService(IContactRepository contactRepository)
         Console.ReadKey();
         Console.WriteLine("Please enter the contact's name:");
         string contactName = Console.ReadLine() ?? string.Empty;
+        
+        do {
+            if (string.IsNullOrWhiteSpace(contactName))
+            {
+                Console.WriteLine("Name cannot be empty. Please enter a valid name:");
+                contactName = Console.ReadLine() ?? string.Empty;
+            }
+        } while (string.IsNullOrWhiteSpace(contactName));
+        
         Console.WriteLine("Please enter the contact's phone number:");
         string contactPhoneNumber = Console.ReadLine() ?? string.Empty;
+        
+        do {
+            if (string.IsNullOrWhiteSpace(contactPhoneNumber))
+            {
+                Console.WriteLine("Phone number cannot be empty. Please enter a valid phone number:");
+                contactPhoneNumber = Console.ReadLine() ?? string.Empty;
+            }
+        } while (string.IsNullOrWhiteSpace(contactPhoneNumber));
+        
         bool isPhoneNumberValid = contactPhoneNumber.IsValidPhoneNumber();
-        if (!isPhoneNumberValid)
-        {
-            Console.WriteLine("Invalid phone number format. Canceling operation.");
-            return;
-        }
+        do {
+            if (!isPhoneNumberValid)
+            {
+                Console.WriteLine("Invalid phone number format. Please enter a valid phone number:");
+                contactPhoneNumber = Console.ReadLine() ?? string.Empty;
+                isPhoneNumberValid = contactPhoneNumber.IsValidPhoneNumber();
+            }
+        } while (!isPhoneNumberValid);
+        
         Console.WriteLine("Please enter the contact's email:");
         string contactEmail = Console.ReadLine() ?? string.Empty;
+        
+        do {
+            if (string.IsNullOrWhiteSpace(contactEmail))
+            {
+                Console.WriteLine("Email cannot be empty. Please enter a valid email:");
+                contactEmail = Console.ReadLine() ?? string.Empty;
+            }
+        } while (string.IsNullOrWhiteSpace(contactEmail));
+        
         contactEmail.IsValidEmail();
-        if (!contactEmail.IsValidEmail())
-        {
-            Console.WriteLine("Invalid email format. Canceling operation.");
-            return;
-        }
+        do {
+            if (!contactEmail.IsValidEmail())
+            {
+                Console.WriteLine("Invalid email format. Please enter a valid email:");
+                contactEmail = Console.ReadLine() ?? string.Empty;
+            }
+        } while (!contactEmail.IsValidEmail());
         
         Contact newContact = new Contact
         {

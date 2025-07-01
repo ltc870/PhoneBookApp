@@ -5,13 +5,10 @@ public static class Validation
 {
    public static bool IsValidPhoneNumber(this string phoneNumber)
    {
-      var phoneNumberPattern = @"^\+?[1-9]\d{1,14}$";
+      var phoneNumberPattern = @"^\d{3}-\d{3}-\d{4}$";
       bool isPhoneNumberValid = Regex.IsMatch(phoneNumber, phoneNumberPattern);
       if (!isPhoneNumberValid)
       {
-         Console.WriteLine("Invalid phone number format.");
-         Console.WriteLine("Press any key to continue...");
-         Console.ReadKey();
          return false;
       }
       return true;
@@ -23,9 +20,6 @@ public static class Validation
       bool isEmailValid = Regex.IsMatch(email, emailPattern);
       if (!isEmailValid)
       {
-         Console.WriteLine("Invalid email format.");
-         Console.WriteLine("Press any key to continue...");
-         Console.ReadKey();
          return false;
       }
       return true;

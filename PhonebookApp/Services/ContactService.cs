@@ -41,10 +41,22 @@ public ContactService(IContactRepository contactRepository)
         Console.Clear();
         await GetAllContacts();
         Console.WriteLine("Please enter the contact ID you want to view:");
-        string id = Console.ReadLine() ?? string.Empty;
-        Contact contact = await _contactRepository.GetContactById(int.Parse(id));
-        
-        Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
+        int id;
+
+        while (!int.TryParse(Console.ReadLine(), out id))
+        {
+            Console.WriteLine("Invalid input. Please enter a valid contact ID:");
+        }
+
+        try
+        {
+            Contact contact = await _contactRepository.GetContactById(id);
+            Console.WriteLine($"Id: {contact.Id}, Name: {contact.Name}, Phone: {contact.PhoneNumber}, Email: {contact.Email}");
+        }
+        catch (KeyNotFoundException e)
+        {
+            Console.WriteLine(e.Message);
+        }
         Console.WriteLine("Press any key to continue...");
         Console.ReadKey();
     }
